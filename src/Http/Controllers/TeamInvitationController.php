@@ -2,6 +2,7 @@
 
 namespace LiraUi\Team\Http\Controllers;
 
+use Illuminate\Http\Request;
 use LiraUi\Team\Contracts\AddsTeamMember;
 use LiraUi\Team\Contracts\InvitesTeamMember;
 use LiraUi\Team\Contracts\UpdatesTeamInvitation;
