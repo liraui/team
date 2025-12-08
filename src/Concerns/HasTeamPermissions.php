@@ -22,7 +22,7 @@ trait HasTeamPermissions
             'canUpdateTeam' => $this->can('update', $team),
             'canUpdateTeamMember' => $this->can('updateTeamMember', $team),
             'canRemoveTeamMember' => $this->can('removeTeamMember', $team),
-            'canLeaveTeam' => ! $this->ownsTeam($team),
+            'canLeaveTeam' => $this->can('leave', $team),
         ];
     }
 

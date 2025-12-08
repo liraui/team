@@ -1,4 +1,4 @@
-import { create } from '@/actions/LiraUi/Team/Http/Controllers/TeamController';
+import { createTeam } from '@/actions/LiraUi/Team/Http/Controllers/TeamController';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -17,7 +17,7 @@ export default function CreateTeam() {
                         <CardDescription>Teams allow you to collaborate with others on projects and manage permissions effectively.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <Form {...create.form()} options={{ preserveScroll: true }} disableWhileProcessing className="flex flex-col gap-y-6">
+                        <Form {...createTeam.form()} options={{ preserveScroll: true }} disableWhileProcessing className="flex flex-col gap-y-6">
                             {({ processing, errors }: { processing: boolean; errors: any }) => (
                                 <>
                                     <div className="flex w-full flex-col gap-y-2">

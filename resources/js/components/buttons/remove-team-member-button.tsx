@@ -1,4 +1,4 @@
-import { remove } from '@/actions/LiraUi/Team/Http/Controllers/TeamMemberController';
+import { removeTeamMember } from '@/actions/LiraUi/Team/Http/Controllers/TeamMemberController';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
@@ -41,7 +41,7 @@ export function RemoveTeamMemberButton({ team, user }: Props) {
                         </DialogDescription>
                     </DialogHeader>
                     <Form
-                        {...remove.form({ team: team.id, user: user.id })}
+                        {...removeTeamMember.form({ team: team.id, user: user.id })}
                         options={{ preserveScroll: true }}
                         onSuccess={() => setOpen(false)}
                         className="flex flex-col gap-y-6"

@@ -45,7 +45,7 @@ class TeamController extends Controller
         name: 'teams.create.submit',
         middleware: ['web', 'auth', 'can:create,LiraUi\Team\Models\Team']
     )]
-    public function create(CreateTeamRequest $request, CreatesTeam $creator): Response
+    public function createTeam(CreateTeamRequest $request, CreatesTeam $creator): Response
     {
         $team = $creator->create($request);
 
@@ -92,7 +92,7 @@ class TeamController extends Controller
         name: 'teams.update',
         middleware: ['web', 'auth', EnsureTeamPermissionContext::class, 'can:update,team']
     )]
-    public function updateName(UpdateTeamNameRequest $request, Team $team, UpdatesTeamName $updater): Response
+    public function updateTeamName(UpdateTeamNameRequest $request, Team $team, UpdatesTeamName $updater): Response
     {
         $updater->update($request, $team);
 
@@ -104,7 +104,7 @@ class TeamController extends Controller
         name: 'teams.delete',
         middleware: ['web', 'auth', EnsureTeamPermissionContext::class, 'can:delete,team']
     )]
-    public function delete(DeleteTeamRequest $request, Team $team, DeletesTeam $deleter): Response
+    public function deleteTeam(DeleteTeamRequest $request, Team $team, DeletesTeam $deleter): Response
     {
         $deleter->delete($request, $team);
 

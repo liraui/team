@@ -15,8 +15,6 @@ class UpdateTeamRoleAction implements UpdatesTeamRole
     {
         $role->update(['name' => $request->name]);
 
-        if ($request->has('permissions')) {
-            $role->syncPermissions($request->permissions);
-        }
+        $role->syncPermissions($request->permissions);
     }
 }

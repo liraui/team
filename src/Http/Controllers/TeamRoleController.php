@@ -52,7 +52,7 @@ class TeamRoleController extends Controller
         name: 'teams.roles.create',
         middleware: ['web', 'auth', EnsureTeamPermissionContext::class, 'can:update,team']
     )]
-    public function create(CreateTeamRoleRequest $request, Team $team, CreatesTeamRole $creator): Response
+    public function createRole(CreateTeamRoleRequest $request, Team $team, CreatesTeamRole $creator): Response
     {
         $creator->create($request);
 
@@ -76,7 +76,7 @@ class TeamRoleController extends Controller
         name: 'teams.roles.delete',
         middleware: ['web', 'auth', EnsureTeamPermissionContext::class, 'can:update,team']
     )]
-    public function delete(DeleteTeamRoleRequest $request, Team $team, Role $role, DeletesTeamRole $deleter): Response
+    public function deleteRole(DeleteTeamRoleRequest $request, Team $team, Role $role, DeletesTeamRole $deleter): Response
     {
         $deleter->delete($request, $role);
 

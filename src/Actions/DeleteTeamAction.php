@@ -6,6 +6,7 @@ use Illuminate\Validation\ValidationException;
 use LiraUi\Team\Contracts\DeletesTeam;
 use LiraUi\Team\Http\Requests\DeleteTeamRequest;
 use LiraUi\Team\Models\Team;
+use \App\Models\User;
 
 class DeleteTeamAction implements DeletesTeam
 {
@@ -20,13 +21,12 @@ class DeleteTeamAction implements DeletesTeam
             ]);
         }
 
-        /** @var \App\Models\User $user */
-        $user = $request->user();
+        $usersToReassign = User::where('current_team_id', $team->id)->get();
+        
+        foreach ($usersToReassign as $userToReassign) {
+            $userToReassign->switchTeam($userToReassign->personalTeam());
+        }
 
         $team->purge();
-
-        if ($user->current_team_id === $team->id) {
-            $user->switchTeam($user->personalTeam());
-        }
     }
 }

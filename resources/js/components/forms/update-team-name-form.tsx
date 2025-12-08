@@ -1,4 +1,4 @@
-import { updateName } from '@/actions/LiraUi/Team/Http/Controllers/TeamController';
+import { updateTeamName } from '@/actions/LiraUi/Team/Http/Controllers/TeamController';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -34,7 +34,7 @@ export function UpdateTeamNameForm({ team }: Props) {
                 <div>
                     <Card className="border-0 bg-transparent py-0 shadow-none">
                         <CardContent className="px-0">
-                            <Form {...updateName.form({ team: team.id })} options={{ preserveScroll: true }} className="flex flex-col gap-y-6">
+                            <Form {...updateTeamName.form({ team: team.id })} options={{ preserveScroll: true }} className="flex flex-col gap-y-6">
                                 {({ processing, errors }: { processing: boolean; errors: any }) => (
                                     <>
                                         <div className="flex flex-col gap-y-4">

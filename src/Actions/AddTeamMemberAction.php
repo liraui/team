@@ -29,9 +29,10 @@ class AddTeamMemberAction implements AddsTeamMember
 
         if ($role) {
             setPermissionsTeamId($team->id);
+            
             $user->assignRole($role);
-        }
 
-        $user->switchTeam($team);
+            $user->switchTeam($team);
+        }
     }
 }

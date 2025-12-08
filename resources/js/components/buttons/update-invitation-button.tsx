@@ -1,4 +1,4 @@
-import { updateRole } from '@/actions/LiraUi/Team/Http/Controllers/TeamInvitationController';
+import { updateInviteRole } from '@/actions/LiraUi/Team/Http/Controllers/TeamInvitationController';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
@@ -41,7 +41,7 @@ export function UpdateInvitationButton({ team, invitation, roles }: Props) {
                         <DialogDescription>Make modification to the invitation before the user accepts it.</DialogDescription>
                     </DialogHeader>
                     <Form
-                        {...updateRole.form({ team: team.id, invitation: invitation.id })}
+                        {...updateInviteRole.form({ team: team.id, invitation: invitation.id })}
                         options={{ preserveScroll: true }}
                         onSuccess={() => setOpen(false)}
                         className="flex flex-col gap-y-6"

@@ -1,4 +1,4 @@
-import { deleteMethod } from '@/actions/LiraUi/Team/Http/Controllers/TeamController';
+import { deleteTeam } from '@/actions/LiraUi/Team/Http/Controllers/TeamController';
 import { Button } from '@/components/ui/button';
 import { PasswordConfirmationDialog } from '@auth/components/dialogs/password-confirmation-dialog';
 import { Trash2Icon } from 'lucide-react';
@@ -24,7 +24,7 @@ export function DeleteTeamButton({ team }: Props) {
                 }}
                 title="Delete team"
                 description="This action cannot be undone. Please enter your password to confirm you want to permanently delete your team."
-                form={deleteMethod.form({ team: team.id })}
+                form={deleteTeam.form({ team: team.id })}
                 success={() => {
                     setShowPasswordDialog(false);
                 }}

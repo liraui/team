@@ -23,7 +23,6 @@ export default function TeamSettings({ team, availablePermissions }: Props) {
                 <UpdateTeamNameForm team={team} />
                 <TeamRolesForm team={team} availablePermissions={availablePermissions} />
                 <TeamMemberManager team={team} />
-                {/* <LeaveTeamForm team={team} /> */}
                 <DeleteTeamForm team={team} />
             </div>
         </div>

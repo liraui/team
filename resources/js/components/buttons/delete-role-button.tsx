@@ -1,4 +1,4 @@
-import { deleteMethod } from '@/actions/LiraUi/Team/Http/Controllers/TeamRoleController';
+import { deleteRole } from '@/actions/LiraUi/Team/Http/Controllers/TeamRoleController';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
@@ -35,7 +35,7 @@ export function DeleteRoleButton({ team, role }: Props) {
                         <DialogDescription>This action cannot be undone. Are you sure you want to delete the role.</DialogDescription>
                     </DialogHeader>
                     <Form
-                        {...deleteMethod.form({ team: team.id, role: role.id })}
+                        {...deleteRole.form({ team: team.id, role: role.id })}
                         options={{ preserveScroll: true }}
                         onSuccess={() => setOpen(false)}
                         className="flex flex-col gap-y-6"

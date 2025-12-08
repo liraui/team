@@ -41,7 +41,7 @@ class TeamInvitationController extends Controller
         name: 'team-invitations.cancel',
         middleware: ['web', 'auth', EnsureTeamPermissionContext::class, 'can:removeTeamMember,team']
     )]
-    public function cancel(Request $request, Team $team, TeamInvitation $invitation): Response
+    public function cancelInvite(Request $request, Team $team, TeamInvitation $invitation): Response
     {
         $invitation->delete();
 
@@ -53,7 +53,7 @@ class TeamInvitationController extends Controller
         name: 'team-invitations.update',
         middleware: ['web', 'auth', EnsureTeamPermissionContext::class, 'can:addTeamMember,team']
     )]
-    public function updateRole(UpdateTeamInvitationRequest $request, Team $team, TeamInvitation $invitation, UpdatesTeamInvitation $updater): Response
+    public function updateInviteRole(UpdateTeamInvitationRequest $request, Team $team, TeamInvitation $invitation, UpdatesTeamInvitation $updater): Response
     {
         $updater->update($request, $invitation);
 
@@ -65,7 +65,7 @@ class TeamInvitationController extends Controller
         name: 'team-invitations.accept',
         middleware: ['web', 'auth', 'signed']
     )]
-    public function accept(AcceptTeamInvitationRequest $request, TeamInvitation $invitation, AddsTeamMember $adder): Response
+    public function acceptInvite(AcceptTeamInvitationRequest $request, TeamInvitation $invitation, AddsTeamMember $adder): Response
     {
         $team = $invitation->team;
 

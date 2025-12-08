@@ -20,7 +20,7 @@ class CurrentTeamUpdatedResponse implements CurrentTeamUpdated
             ]);
         }
 
-        return redirect()->route('teams.settings', $request->team_id)->with('flash', [
+        return back()->with('flash', [
             'type' => 'success',
             'message' => 'Current team has been updated successfully.',
         ]);

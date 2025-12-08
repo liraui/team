@@ -23,7 +23,7 @@ class TeamMemberController extends Controller
         name: 'team-members.update',
         middleware: ['web', 'auth', EnsureTeamPermissionContext::class, 'can:updateTeamMember,team']
     )]
-    public function updateRole(UpdateTeamMemberRoleRequest $request, Team $team, User $user, UpdatesTeamMemberRole $updater): Response
+    public function updateTeamMemberRole(UpdateTeamMemberRoleRequest $request, Team $team, User $user, UpdatesTeamMemberRole $updater): Response
     {
         $updater->update($request, $team, $user);
 
@@ -35,7 +35,7 @@ class TeamMemberController extends Controller
         name: 'team-members.remove',
         middleware: ['web', 'auth', EnsureTeamPermissionContext::class]
     )]
-    public function remove(LeaveTeamRequest $request, Team $team, User $user, LeavesTeam $leaver): Response
+    public function removeTeamMember(LeaveTeamRequest $request, Team $team, User $user, LeavesTeam $leaver): Response
     {
         /** @var \App\Models\User $currentUser */
         $currentUser = $request->user();

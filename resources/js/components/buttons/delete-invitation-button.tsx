@@ -1,4 +1,4 @@
-import { cancel } from '@/actions/LiraUi/Team/Http/Controllers/TeamInvitationController';
+import { cancelInvite } from '@/actions/LiraUi/Team/Http/Controllers/TeamInvitationController';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
@@ -35,7 +35,7 @@ export function DeleteInvitationButton({ team, invitation }: Props) {
                         </DialogDescription>
                     </DialogHeader>
                     <Form
-                        {...cancel.form({ team: team.id, invitation: invitation.id })}
+                        {...cancelInvite.form({ team: team.id, invitation: invitation.id })}
                         options={{ preserveScroll: true }}
                         onSuccess={() => setOpen(false)}
                         className="flex flex-col gap-y-6"

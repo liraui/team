@@ -73,4 +73,12 @@ class TeamPolicy
     {
         return $user->hasTeamPermission($team, 'delete team');
     }
+
+    /**
+     * Determine whether the user can leave the team.
+     */
+    public function leave(User $user, Team $team): bool
+    {
+        return ! $user->ownsTeam($team);
+    }
 }

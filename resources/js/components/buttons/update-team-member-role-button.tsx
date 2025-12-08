@@ -1,4 +1,4 @@
-import { updateRole } from '@/actions/LiraUi/Team/Http/Controllers/TeamMemberController';
+import { updateTeamMemberRole } from '@/actions/LiraUi/Team/Http/Controllers/TeamMemberController';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
@@ -41,7 +41,7 @@ export function UpdateTeamMemberRoleButton({ team, user, roles }: Props) {
                         <DialogDescription>Make modification to the team member's role. This change will take effect immediately.</DialogDescription>
                     </DialogHeader>
                     <Form
-                        {...updateRole.form({ team: team.id, user: user.id })}
+                        {...updateTeamMemberRole.form({ team: team.id, user: user.id })}
                         options={{ preserveScroll: true }}
                         onSuccess={() => setOpen(false)}
                         className="flex flex-col gap-y-6"

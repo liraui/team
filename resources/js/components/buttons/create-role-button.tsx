@@ -1,4 +1,4 @@
-import { create } from '@/actions/LiraUi/Team/Http/Controllers/TeamRoleController';
+import { createRole } from '@/actions/LiraUi/Team/Http/Controllers/TeamRoleController';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
@@ -49,7 +49,7 @@ export function CreateRoleButton({ team, availablePermissions }: CreateRoleButto
                     <DialogDescription>Role will be assigned to team members and define their permissions within the team.</DialogDescription>
                 </DialogHeader>
                 <Form
-                    {...create.form({ team: team.id })}
+                    {...createRole.form({ team: team.id })}
                     options={{ preserveScroll: true }}
                     onSuccess={() => {
                         setOpen(false);
