@@ -1,16 +1,20 @@
 import { showCreateForm, showTeam, switchTeam } from '@/actions/LiraUi/Team/Http/Controllers/TeamController';
+import { removeTeamMember } from '@/actions/LiraUi/Team/Http/Controllers/TeamMemberController';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import { cn, isSameUrl } from '@/lib/utils';
 import type { SharedData } from '@/types';
-import { Link, usePage } from '@inertiajs/react';
-import { Plus, Settings } from 'lucide-react';
+import { Link, usePage, Form } from '@inertiajs/react';
+import { PlusIcon, SettingsIcon, DoorOpenIcon, Loader2 as Spinner } from 'lucide-react';
 import { useState } from 'react';
 import { useTeamAbilities } from '../hooks/use-team-abilities';
 import { Team } from '../types';
 
 export function TeamSwitcher() {
     const [open, setOpen] = useState(false);
+    const [leaveDialogOpen, setLeaveDialogOpen] = useState(false);
 
     const page = usePage<SharedData>();
 
@@ -83,7 +87,7 @@ export function TeamSwitcher() {
                                     onClick={() => setOpen(false)}
                                     className="border-border text-muted-foreground hover:border-primary hover:text-primary flex h-8 w-8 items-center justify-center rounded-lg border-2 border-dashed transition-colors"
                                 >
-                                    <Plus className="h-5 w-5" />
+                                    <PlusIcon className="h-5 w-5" />
                                 </Link>
                             </TooltipTrigger>
                             <TooltipContent side="right" sideOffset={8}>
@@ -106,7 +110,7 @@ export function TeamSwitcher() {
                                             },
                                         )}
                                     >
-                                        <Settings className="h-5 w-5" />
+                                        <SettingsIcon className="h-5 w-5" />
                                     </Link>
                                 </TooltipTrigger>
                                 <TooltipContent side="right" sideOffset={8}>
@@ -114,9 +118,59 @@ export function TeamSwitcher() {
                                 </TooltipContent>
                             </Tooltip>
                         )}
+                        {abilities?.canLeaveTeam && !currentTeam.personal_team && (
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <Button
+                                        variant="ghost"
+                                        size="icon"
+                                        onClick={() => setLeaveDialogOpen(true)}
+                                        className="text-muted-foreground hover:bg-destructive hover:text-destructive-foreground h-8 w-8 rounded-lg"
+                                    >
+                                        <DoorOpenIcon className="h-5 w-5" />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent side="right" sideOffset={8}>
+                                    Leave team
+                                </TooltipContent>
+                            </Tooltip>
+                        )}
                     </div>
                 </DropdownMenuContent>
             </DropdownMenu>
+            <Dialog open={leaveDialogOpen} onOpenChange={setLeaveDialogOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>Leaving team</DialogTitle>
+                        <DialogDescription>
+                            Are you sure you want to leave the team. All of your resources and data will be inaccessible to you until you are invited back
+                            to the team.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <Form
+                        {...removeTeamMember.form({ team: currentTeam.id, user: user.id })}
+                        options={{ preserveScroll: true }}
+                        onSuccess={() => setLeaveDialogOpen(false)}
+                        className="flex flex-col gap-y-6"
+                    >
+                        {({ processing }: { processing: boolean }) => (
+                            <>
+                                <DialogFooter>
+                                    <DialogClose asChild>
+                                        <Button variant="outline" type="button">
+                                            Cancel
+                                        </Button>
+                                    </DialogClose>
+                                    <Button variant="destructive" type="submit" disabled={processing}>
+                                        {processing && <Spinner className="mr-2 h-4 w-4 animate-spin" />}
+                                        Leave team
+                                    </Button>
+                                </DialogFooter>
+                            </>
+                        )}
+                    </Form>
+                </DialogContent>
+            </Dialog>
         </TooltipProvider>
     );
 }
