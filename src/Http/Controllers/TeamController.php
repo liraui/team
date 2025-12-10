@@ -76,13 +76,13 @@ class TeamController extends Controller
     }
 
     #[Put(
-        uri: '/current-team',
+        uri: '/current-team/{team}',
         name: 'current-team.switch',
-        middleware: ['web', 'auth', EnsureTeamPermissionContext::class]
+        middleware: ['web', 'auth', EnsureTeamPermissionContext::class, 'can:switchTeam,team']
     )]
-    public function switchTeam(UpdateCurrentTeamRequest $request, SwitchesTeam $switcher): Response
+    public function switchTeam(UpdateCurrentTeamRequest $request, Team $team, SwitchesTeam $switcher): Response
     {
-        $switcher->switch($request);
+        $switcher->switch($request, $team);
 
         return app(CurrentTeamUpdated::class)->toResponse($request);
     }

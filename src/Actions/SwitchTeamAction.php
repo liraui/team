@@ -12,16 +12,14 @@ class SwitchTeamAction implements SwitchesTeam
     /**
      * Switch the authenticated user's current team.
      */
-    public function switch(UpdateCurrentTeamRequest $request): bool
+    public function switch(UpdateCurrentTeamRequest $request, Team $team): bool
     {
-        $team = Team::findOrFail($request->team_id);
-
         /** @var \App\Models\User $user */
         $user = $request->user();
 
         if (! $user->switchTeam($team)) {
             throw ValidationException::withMessages([
-                'team_id' => [__('The team could not be switched.')],
+                'team' => [__('The team could not be switched.')],
             ]);
         }
 

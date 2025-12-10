@@ -81,4 +81,12 @@ class TeamPolicy
     {
         return ! $user->ownsTeam($team);
     }
+
+    /**
+     * Determine whether the user can switch to the given team.
+     */
+    public function switchTeam(User $user, Team $team): bool
+    {
+        return $user->belongsToTeam($team);
+    }
 }

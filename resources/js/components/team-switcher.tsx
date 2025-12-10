@@ -46,9 +46,8 @@ export function TeamSwitcher() {
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Link
-                                    href={switchTeam.url()}
+                                    href={switchTeam.url({ team: activeTeam?.id })}
                                     method="put"
-                                    data={{ team_id: activeTeam?.id }}
                                     preserveState={false}
                                     onSuccess={() => setOpen(false)}
                                     className="bg-primary text-primary-foreground ring-primary ring-offset-background flex h-8 w-8 items-center justify-center rounded-lg text-sm font-semibold ring-2 ring-offset-2"
@@ -64,9 +63,8 @@ export function TeamSwitcher() {
                             <Tooltip key={team.id}>
                                 <TooltipTrigger asChild>
                                     <Link
-                                        href={switchTeam.url()}
+                                        href={switchTeam.url({ team: team.id })}
                                         method="put"
-                                        data={{ team_id: team.id }}
                                         preserveState={false}
                                         onSuccess={() => setOpen(false)}
                                         className="bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground flex h-8 w-8 items-center justify-center rounded-lg text-sm font-semibold transition-all"

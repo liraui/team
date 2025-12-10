@@ -3,7 +3,6 @@
 namespace LiraUi\Team\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use LiraUi\Team\Models\Team;
 
 class UpdateCurrentTeamRequest extends FormRequest
 {
@@ -12,9 +11,7 @@ class UpdateCurrentTeamRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        $team = Team::find($this->team_id);
-
-        return $team && $this->user()->belongsToTeam($team);
+        return true;
     }
 
     /**
@@ -22,8 +19,6 @@ class UpdateCurrentTeamRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'team_id' => ['required', 'exists:teams,id'],
-        ];
+        return [];
     }
 }
