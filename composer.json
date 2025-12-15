@@ -25,7 +25,8 @@
     "require-dev": {
         "laravel/pint": "^1.0",
         "mockery/mockery": "^1.0",
-        "phpunit/phpunit": "^10.4"
+        "orchestra/testbench": "^9.15",
+        "pestphp/pest": "^4.1"
     },
     "autoload": {
         "psr-4": {
@@ -35,16 +36,20 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "LiraUi\\Team\\Tests\\": "tests/"
+            "LiraUi\\Team\\Tests\\": "tests/",
+            "App\\Models\\": "tests/App/Models/"
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "test": "vendor/bin/pest",
+        "test-coverage": "XDEBUG_MODE=coverage vendor/bin/pest --coverage",
         "pint": "vendor/bin/pint"
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
     },
     "extra": {
         "laravel": {

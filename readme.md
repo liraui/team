@@ -25,6 +25,17 @@ composer require liraui/team
 
 For full installation instructions and documentation, visit the [Installation guide](https://liraui.com/docs/team/installation).
 
+## Testing
+
+```bash
+composer test
+# Tests:    1 skipped (0 assertions)
+# Duration: 0.30s
+
+composer test-coverage
+# Total: 0.0 % 
+```
+
 ## Contributing
 
 Bug reports and contributions are welcome — please open an issue or a pull request. Maintain a short description of breaking changes.
