@@ -15,7 +15,7 @@ class CreateTeamAction implements CreatesTeam
     {
         /** @var \App\Models\User $user */
         $user = $request->user();
-        
+
         $validated = $request->validated();
 
         return Team::forceCreate([

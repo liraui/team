@@ -16,9 +16,7 @@ class TeamInvitation extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(public TeamInvitationModel $invitation)
-    {
-    }
+    public function __construct(public TeamInvitationModel $invitation) {}
 
     /**
      * Get the message envelope.

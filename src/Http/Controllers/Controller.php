@@ -2,6 +2,4 @@
 
 namespace LiraUi\Team\Http\Controllers;
 
-abstract class Controller
-{
-}
+abstract class Controller {}

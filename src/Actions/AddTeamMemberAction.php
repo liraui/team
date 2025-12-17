@@ -16,7 +16,7 @@ class AddTeamMemberAction implements AddsTeamMember
     {
         /** @var \App\Models\User $user */
         $user = $request->user();
-        
+
         $team = $invitation->team;
 
         abort_if($user->email !== $invitation->email, 404);
@@ -29,7 +29,7 @@ class AddTeamMemberAction implements AddsTeamMember
 
         if ($role) {
             setPermissionsTeamId($team->id);
-            
+
             $user->assignRole($role);
 
             $user->switchTeam($team);

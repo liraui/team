@@ -2,10 +2,10 @@
 
 namespace LiraUi\Team\Actions;
 
+use Illuminate\Validation\ValidationException;
 use LiraUi\Team\Contracts\SwitchesTeam;
 use LiraUi\Team\Http\Requests\UpdateCurrentTeamRequest;
 use LiraUi\Team\Models\Team;
-use Illuminate\Validation\ValidationException;
 
 class SwitchTeamAction implements SwitchesTeam
 {

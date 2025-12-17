@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Collection;
 use LiraUi\Team\Models\Team;
-use Spatie\Permission\Models\Role;
 
 trait HasTeams
 {
-
     /**
      * Boot the HasTeams trait.
      */

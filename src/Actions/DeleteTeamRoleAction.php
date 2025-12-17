@@ -5,7 +5,6 @@ namespace LiraUi\Team\Actions;
 use Illuminate\Validation\ValidationException;
 use LiraUi\Team\Contracts\DeletesTeamRole;
 use LiraUi\Team\Http\Requests\DeleteTeamRoleRequest;
-use LiraUi\Team\Models\TeamInvitation;
 use Spatie\Permission\Models\Role;
 
 class DeleteTeamRoleAction implements DeletesTeamRole
@@ -22,7 +21,7 @@ class DeleteTeamRoleAction implements DeletesTeamRole
         }
 
         $team = $request->team;
-        
+
         $pendingInvitationsCount = $team->teamInvitations()->where('role_id', $role->id)->count();
 
         if ($pendingInvitationsCount > 0) {

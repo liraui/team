@@ -69,7 +69,7 @@ class TeamController extends Controller
                 'owner',
                 'users',
                 'roles' => fn ($query) => $query->select('roles.*')->with('permissions'),
-                'teamInvitations'
+                'teamInvitations',
             ])))->resolve(),
             'availablePermissions' => Permission::all()->pluck('name'),
         ]);

@@ -21,7 +21,7 @@ class LeaveTeamAction implements LeavesTeam
         $memberToRemove = $teamMember ?? $user;
 
         $this->ensureMemberBelongsToTeam($memberToRemove, $team);
-        
+
         $this->ensureMemberDoesNotOwnTeam($memberToRemove, $team);
 
         $this->removeTeamRoles($memberToRemove, $team);

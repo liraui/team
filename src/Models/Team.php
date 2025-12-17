@@ -44,6 +44,16 @@ class Team extends Model
     ];
 
     /**
+     * Create a new factory instance for the model.
+     *
+     * @return TFactory|null
+     */
+    protected static function newFactory()
+    {
+        return \LiraUi\Team\Tests\Database\Factories\TeamFactory::new();
+    }
+
+    /**
      * Get the owner of the team.
      */
     public function owner(): BelongsTo
@@ -96,16 +106,16 @@ class Team extends Model
 
         $this->users->each(function ($member) {
             $teamRoles = $member->roles()->get();
-            
+
             foreach ($teamRoles as $role) {
                 $member->removeRole($role);
             }
         });
 
         $this->users()->detach();
-        
+
         $this->roles()->delete();
-        
+
         $this->teamInvitations()->delete();
 
         $this->delete();
