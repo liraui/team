@@ -10,11 +10,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravolt\Avatar\Avatar;
 use LiraUi\Auth\Concerns\HasEmailVerification;
+use LiraUi\Team\Concerns\HasTeamPermissions;
+use LiraUi\Team\Concerns\HasTeams;
 
 class User extends Authenticatable
 {
     use HasEmailVerification;
     use HasFactory;
+    use HasTeamPermissions;
+    use HasTeams;
     use Notifiable;
 
     /**
@@ -47,6 +51,9 @@ class User extends Authenticatable
     protected $appends = [
         'name',
         'avatar',
+        'all_teams',
+        'current_team',
+        'team_abilities',
     ];
 
     /**
@@ -69,7 +76,7 @@ class User extends Authenticatable
      */
     protected static function newFactory()
     {
-        return \LiraUi\Auth\Tests\Database\Factories\UserFactory::new();
+        return \LiraUi\Team\Tests\Database\Factories\UserFactory::new();
     }
 
     /**

@@ -8,6 +8,9 @@
         "team"
     ],
     "license": "MIT",
+    "repositories": [
+        { "type": "vcs", "url": "https://github.com/liraui/auth" }
+    ],
     "authors": [
         {
             "name": "Ahsan Zia",
@@ -17,6 +20,7 @@
     ],
     "require": {
         "php": "^8.4",
+        "liraui/auth": "@dev",
         "inertiajs/inertia-laravel": "^2.0",
         "laravel/wayfinder": "^0.1.12",
         "spatie/laravel-permission": "^6.0",
