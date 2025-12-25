@@ -17,7 +17,9 @@ class SwitchTeamAction implements SwitchesTeam
         /** @var \App\Models\User $user */
         $user = $request->user();
 
-        if (! $user->switchTeam($team)) {
+        $user->switchTeam($team);
+
+        if ($user->current_team_id !== $team->id) {
             throw ValidationException::withMessages([
                 'team' => [__('The team could not be switched.')],
             ]);

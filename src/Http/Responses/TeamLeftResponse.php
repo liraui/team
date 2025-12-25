@@ -20,7 +20,12 @@ class TeamLeftResponse implements TeamLeft
             ]);
         }
 
-        return redirect()->route('teams.settings', $request->user()->currentTeam)->with('flash', [
+        /** @var \App\Models\User $user */
+        $user = $request->user();
+
+        $currentTeam = $user->getRelationValue('currentTeam');
+
+        return redirect()->route('teams.settings', $currentTeam)->with('flash', [
             'type' => 'success',
             'message' => 'You have left the team.',
         ]);

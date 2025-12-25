@@ -13,8 +13,10 @@ class UpdateTeamRoleAction implements UpdatesTeamRole
      */
     public function update(UpdateTeamRoleRequest $request, Role $role): void
     {
-        $role->update(['name' => $request->name]);
+        $role->update(['name' => $request->input('name')]);
 
-        $role->syncPermissions($request->permissions);
+        if ($request->has('permissions')) {
+            $role->syncPermissions((array) $request->input('permissions'));
+        }
     }
 }

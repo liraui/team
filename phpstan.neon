@@ -1,0 +1,9 @@
+parameters:
+    level: 10
+    phpVersion: 80400
+    paths:
+        - src
+    ignoreErrors:
+        - '#Access to an undefined property Illuminate\\Contracts\\Foundation\\Application::\$router#'
+        - '#Trait .*HasTeamPermissions is used zero times and is not analysed#'
+        - '#Trait .*HasTeams is used zero times and is not analysed#'

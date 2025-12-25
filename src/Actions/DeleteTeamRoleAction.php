@@ -20,7 +20,8 @@ class DeleteTeamRoleAction implements DeletesTeamRole
             ]);
         }
 
-        $team = $request->team;
+        /** @var \LiraUi\Team\Models\Team $team */
+        $team = $request->input('team');
 
         $pendingInvitationsCount = $team->teamInvitations()->where('role_id', $role->id)->count();
 

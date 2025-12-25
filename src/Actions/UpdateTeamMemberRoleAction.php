@@ -15,17 +15,16 @@ class UpdateTeamMemberRoleAction implements UpdatesTeamMemberRole
      */
     public function update(UpdateTeamMemberRoleRequest $request, Team $team, User $teamMember): void
     {
-        $validated = $request->validated();
-
         setPermissionsTeamId($team->id);
 
         $existingRoles = $teamMember->roles()->get();
 
         foreach ($existingRoles as $existingRole) {
+            /** @var \Spatie\Permission\Models\Role $existingRole */
             $teamMember->removeRole($existingRole);
         }
 
-        $role = Role::where('id', $validated['role_id'])->first();
+        $role = Role::query()->where('id', $request->input('role_id'))->first();
 
         if ($role) {
             $teamMember->assignRole($role);

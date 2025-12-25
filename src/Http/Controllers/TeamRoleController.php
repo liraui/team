@@ -33,10 +33,10 @@ class TeamRoleController extends Controller
     )]
     public function showRoles(Request $request, Team $team): InertiaResponse
     {
-        $roles = Role::where('team_id', $team->id)->get()->map(fn ($role): array => [
+        $roles = Role::query()->where('team_id', $team->id)->get()->map(fn (Role $role): array => [
             'id' => $role->id,
             'name' => $role->name,
-            'permissions' => $role->permissions->pluck('name'),
+            'permissions' => $role->permissions()->pluck('name'),
         ]);
 
         $permissions = Permission::all()->pluck('name');

@@ -21,7 +21,7 @@ class DeleteTeamAction implements DeletesTeam
             ]);
         }
 
-        $usersToReassign = User::where('current_team_id', $team->id)->get();
+        $usersToReassign = User::query()->where('current_team_id', $team->id)->get();
 
         foreach ($usersToReassign as $userToReassign) {
             $userToReassign->switchTeam($userToReassign->personalTeam());

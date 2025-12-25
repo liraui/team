@@ -13,10 +13,15 @@ class EnsureTeamPermissionContext
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($team = $request->route('team')) {
+        $team = $request->route('team');
+
+        if ($team instanceof \LiraUi\Team\Models\Team) {
             setPermissionsTeamId($team->id);
 
-            return $next($request);
+            $response = $next($request);
+
+            /** @var Response $response */
+            return $response;
         }
 
         /** @var \App\Models\User|null $user */
@@ -26,6 +31,9 @@ class EnsureTeamPermissionContext
             setPermissionsTeamId($user->current_team_id);
         }
 
-        return $next($request);
+        $response = $next($request);
+
+        /** @var Response $response */
+        return $response;
     }
 }

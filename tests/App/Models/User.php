@@ -13,13 +13,35 @@ use LiraUi\Auth\Concerns\HasEmailVerification;
 use LiraUi\Team\Concerns\HasTeamPermissions;
 use LiraUi\Team\Concerns\HasTeams;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property string $avatar
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $email
+ * @property string|null $two_factor_secret
+ * @property string|null $two_factor_recovery_codes
+ * @property \Carbon\Carbon|null $two_factor_confirmed_at
+ * @property int|null $current_team_id
+ * @property \LiraUi\Team\Models\Team|null $currentTeam
+ *
+ * @method \Illuminate\Database\Eloquent\Relations\BelongsToMany roles()
+ * @method void removeRole(\Spatie\Permission\Models\Role $role)
+ * @method void assignRole(mixed $role)
+ * @method bool switchTeam(mixed $team)
+ * @method bool belongsToTeam(mixed $team)
+ * @method bool ownsTeam(mixed $team)
+ * @method \LiraUi\Team\Models\Team personalTeam()
+ */
 class User extends Authenticatable
 {
-    use HasEmailVerification;
-    use HasFactory;
-    use HasTeamPermissions;
-    use HasTeams;
-    use Notifiable;
+    /** @use HasFactory<\LiraUi\Team\Tests\Database\Factories\UserFactory> */
+    use HasEmailVerification,
+        HasFactory,
+        HasTeamPermissions,
+        HasTeams,
+        Notifiable;
 
     /**
      * The attributes that are mass assignable.

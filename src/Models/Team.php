@@ -11,8 +11,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Laravolt\Avatar\Avatar;
 
+/**
+ * @property int $id
+ * @property string $name
+ * @property bool $personal_team
+ * @property string $avatar
+ * @property \Carbon\Carbon|null $created_at
+ * @property \Carbon\Carbon|null $updated_at
+ * @property \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $users
+ * @property \Illuminate\Database\Eloquent\Collection<int, \LiraUi\Team\Models\TeamInvitation> $teamInvitations
+ *
+ * @use HasFactory<\LiraUi\Team\Tests\Database\Factories\TeamFactory>
+ */
 class Team extends Model
 {
+    /** @use HasFactory<\LiraUi\Team\Tests\Database\Factories\TeamFactory> */
     use HasFactory;
 
     /**
@@ -46,7 +59,7 @@ class Team extends Model
     /**
      * Create a new factory instance for the model.
      *
-     * @return TFactory|null
+     * @return \LiraUi\Team\Tests\Database\Factories\TeamFactory|null
      */
     protected static function newFactory()
     {
@@ -55,6 +68,8 @@ class Team extends Model
 
     /**
      * Get the owner of the team.
+     *
+     * @return BelongsTo<\App\Models\User, $this>
      */
     public function owner(): BelongsTo
     {
@@ -63,6 +78,8 @@ class Team extends Model
 
     /**
      * Get all of the users that belong to the team.
+     *
+     * @return BelongsToMany<\App\Models\User, $this>
      */
     public function users(): BelongsToMany
     {
@@ -71,6 +88,8 @@ class Team extends Model
 
     /**
      * Get all roles for the team.
+     *
+     * @return HasMany<\Spatie\Permission\Models\Role, $this>
      */
     public function roles(): HasMany
     {
@@ -79,6 +98,8 @@ class Team extends Model
 
     /**
      * Get all of the pending invitations for the team.
+     *
+     * @return HasMany<\LiraUi\Team\Models\TeamInvitation, $this>
      */
     public function teamInvitations(): HasMany
     {
@@ -93,7 +114,10 @@ class Team extends Model
         return Attribute::get(function (): string {
             $avatar = app(Avatar::class);
 
-            return $avatar->create($this->name)->toGravatar(['d' => 'initials', 'r' => 'g', 's' => 100]);
+            /** @var string $name */
+            $name = $this->getAttribute('name') ?? '';
+
+            return $avatar->create($name)->toGravatar(['d' => 'initials', 'r' => 'g', 's' => 100]);
         });
     }
 
@@ -104,10 +128,11 @@ class Team extends Model
     {
         setPermissionsTeamId($this->id);
 
-        $this->users->each(function ($member) {
+        $this->users->each(function (User $member) {
             $teamRoles = $member->roles()->get();
 
             foreach ($teamRoles as $role) {
+                /** @var \Spatie\Permission\Models\Role $role */
                 $member->removeRole($role);
             }
         });

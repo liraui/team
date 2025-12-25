@@ -2,6 +2,7 @@
 
 namespace LiraUi\Team\Http\Requests;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -17,6 +18,8 @@ class CreateTeamRoleRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -25,8 +28,11 @@ class CreateTeamRoleRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('roles')->where(function ($query) {
-                    return $query->where('team_id', $this->user()->current_team_id);
+                Rule::unique('roles')->where(function (Builder $query) {
+                    /** @var \App\Models\User $user */
+                    $user = $this->user();
+
+                    $query->where('team_id', $user->current_team_id);
                 }),
             ],
             'permissions' => ['array'],
@@ -36,6 +42,8 @@ class CreateTeamRoleRequest extends FormRequest
 
     /**
      * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, mixed>
      */
     public function messages(): array
     {

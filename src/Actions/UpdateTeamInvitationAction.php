@@ -13,10 +13,8 @@ class UpdateTeamInvitationAction implements UpdatesTeamInvitation
      */
     public function update(UpdateTeamInvitationRequest $request, TeamInvitation $invitation): void
     {
-        $validated = $request->validated();
-
         $invitation->update([
-            'role_id' => $validated['role_id'],
+            'role_id' => $request->input('role_id'),
         ]);
     }
 }

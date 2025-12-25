@@ -13,6 +13,8 @@ class UpdateTeamNameAction implements UpdatesTeamName
      */
     public function update(UpdateTeamNameRequest $request, Team $team): void
     {
-        $team->update($request->validated());
+        $team->update([
+            'name' => $request->input('name'),
+        ]);
     }
 }

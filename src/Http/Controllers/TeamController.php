@@ -68,7 +68,11 @@ class TeamController extends Controller
             'team' => (new TeamResource($team->load([
                 'owner',
                 'users',
-                'roles' => fn ($query) => $query->select('roles.*')->with('permissions'),
+                'roles' => function ($query) {
+                    /** @var \Illuminate\Database\Eloquent\Builder<\Spatie\Permission\Models\Role> $query */
+                    return $query->select('roles.*');
+                },
+                'roles.permissions',
                 'teamInvitations',
             ])))->resolve(),
             'availablePermissions' => Permission::all()->pluck('name'),

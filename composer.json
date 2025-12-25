@@ -30,7 +30,8 @@
         "laravel/pint": "^1.0",
         "mockery/mockery": "^1.0",
         "orchestra/testbench": "^9.15",
-        "pestphp/pest": "^4.1"
+        "pestphp/pest": "^4.1",
+        "phpstan/phpstan": "^2.1"
     },
     "autoload": {
         "psr-4": {
@@ -47,7 +48,8 @@
     "scripts": {
         "test": "vendor/bin/pest",
         "test-coverage": "XDEBUG_MODE=coverage vendor/bin/pest --coverage",
-        "pint": "vendor/bin/pint"
+        "pint": "vendor/bin/pint",
+        "stan": "vendor/bin/phpstan analyse --memory-limit 256m"
     },
     "config": {
         "sort-packages": true,

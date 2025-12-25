@@ -25,7 +25,7 @@ class AddTeamMemberAction implements AddsTeamMember
             $team->users()->attach($user);
         }
 
-        $role = Role::where('id', $invitation->role_id)->where('team_id', $team->id)->first();
+        $role = Role::query()->where('id', $invitation->role_id)->where('team_id', $team->id)->first();
 
         if ($role) {
             setPermissionsTeamId($team->id);

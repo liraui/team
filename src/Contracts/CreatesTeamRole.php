@@ -3,7 +3,7 @@
 namespace LiraUi\Team\Contracts;
 
 use LiraUi\Team\Http\Requests\CreateTeamRoleRequest;
-use Spatie\Permission\Models\Role;
+use Spatie\Permission\Contracts\Role;
 
 interface CreatesTeamRole
 {

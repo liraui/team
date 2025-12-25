@@ -17,6 +17,8 @@ class UpdateTeamInvitationRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -24,8 +26,11 @@ class UpdateTeamInvitationRequest extends FormRequest
             'role_id' => [
                 'required',
                 'integer',
-                Rule::exists('roles', 'id')->where(function ($query) {
-                    $query->where('team_id', $this->route('invitation')->team_id);
+                Rule::exists('roles', 'id')->where(function (\Illuminate\Database\Eloquent\Builder $query) {
+                    /** @var \LiraUi\Team\Models\TeamInvitation $invitation */
+                    $invitation = $this->route('invitation');
+
+                    $query->where('team_id', $invitation->team_id);
                 }),
             ],
         ];

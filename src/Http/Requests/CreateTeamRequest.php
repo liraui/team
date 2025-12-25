@@ -17,6 +17,8 @@ class CreateTeamRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -31,7 +33,10 @@ class CreateTeamRequest extends FormRequest
     public function withValidator(Validator $validator): void
     {
         $validator->after(function (Validator $validator) {
-            if ($this->user()->ownedTeams()->count() >= 3) {
+            /** @var \App\Models\User $user */
+            $user = $this->user();
+
+            if ($user->ownedTeams()->count() >= 3) {
                 $validator->errors()->add('name', 'You can only create up to 3 teams.');
             }
         });

@@ -15,13 +15,14 @@ class InviteTeamMemberAction implements InvitesTeamMember
      */
     public function invite(InviteTeamMemberRequest $request, Team $team): void
     {
-        $validated = $request->validated();
+        $email = $request->input('email');
 
         $invitation = $team->teamInvitations()->create([
-            'email' => $validated['email'],
-            'role_id' => $validated['role_id'],
+            'email' => $email,
+            'role_id' => $request->input('role_id'),
         ]);
 
-        Mail::to($validated['email'])->send(new TeamInvitation($invitation));
+        /** @var \LiraUi\Team\Models\TeamInvitation $invitation */
+        Mail::to($email)->send(new TeamInvitation($invitation));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace LiraUi\Team\Http\Requests;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -17,6 +18,8 @@ class UpdateTeamMemberRoleRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -24,8 +27,11 @@ class UpdateTeamMemberRoleRequest extends FormRequest
             'role_id' => [
                 'required',
                 'integer',
-                Rule::exists('roles', 'id')->where(function ($query) {
-                    $query->where('team_id', $this->route('team')->id);
+                Rule::exists('roles', 'id')->where(function (Builder $query) {
+                    /** @var \LiraUi\Team\Models\Team $team */
+                    $team = $this->route('team');
+
+                    $query->where('team_id', $team->id);
                 }),
             ],
         ];

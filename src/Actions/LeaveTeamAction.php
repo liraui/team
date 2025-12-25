@@ -41,6 +41,7 @@ class LeaveTeamAction implements LeavesTeam
         $teamRoles = $member->roles()->get();
 
         foreach ($teamRoles as $role) {
+            /** @var \Spatie\Permission\Models\Role $role */
             $member->removeRole($role);
         }
     }

@@ -17,6 +17,8 @@ class DeleteTeamRequest extends FormRequest
 
     /**
      * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
      */
     public function rules(): array
     {
@@ -29,7 +31,10 @@ class DeleteTeamRequest extends FormRequest
     public function withValidator(Validator $validator): void
     {
         $validator->after(function (Validator $validator) {
-            if ($this->route('team')->personal_team) {
+            /** @var \LiraUi\Team\Models\Team $team */
+            $team = $this->route('team');
+
+            if ($team->personal_team) {
                 $validator->errors()->add('team', 'You cannot delete your personal team.');
             }
         });

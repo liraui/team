@@ -16,12 +16,14 @@ class CreateTeamAction implements CreatesTeam
         /** @var \App\Models\User $user */
         $user = $request->user();
 
-        $validated = $request->validated();
+        $team = new Team;
 
-        return Team::forceCreate([
+        $team->forceFill([
             'user_id' => $user->id,
-            'name' => $validated['name'],
+            'name' => $request->input('name'),
             'personal_team' => false,
-        ]);
+        ])->save();
+
+        return $team;
     }
 }
