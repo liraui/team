@@ -26,7 +26,8 @@ class UpdateTeamInvitationRequest extends FormRequest
             'role_id' => [
                 'required',
                 'integer',
-                Rule::exists('roles', 'id')->where(function (\Illuminate\Database\Eloquent\Builder $query) {
+                Rule::exists('roles', 'id')->where(function ($query) {
+                    /** @var \Illuminate\Database\Eloquent\Builder $query */
                     /** @var \LiraUi\Team\Models\TeamInvitation $invitation */
                     $invitation = $this->route('invitation');
 

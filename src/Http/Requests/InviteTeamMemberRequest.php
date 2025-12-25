@@ -28,7 +28,8 @@ class InviteTeamMemberRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('team_invitations')->where(function (Builder $query) {
+                Rule::unique('team_invitations')->where(function ($query) {
+                    /** @var \Illuminate\Database\Eloquent\Builder $query */
                     /** @var \App\Models\User $user */
                     $user = $this->user();
 
@@ -48,7 +49,8 @@ class InviteTeamMemberRequest extends FormRequest
             'role_id' => [
                 'required',
                 'integer',
-                Rule::exists('roles', 'id')->where(function (\Illuminate\Database\Eloquent\Builder $query) {
+                Rule::exists('roles', 'id')->where(function ($query) {
+                    /** @var \Illuminate\Database\Query\Builder|\Illuminate\Database\Eloquent\Builder $query */
                     /** @var \App\Models\User $user */
                     $user = $this->user();
 

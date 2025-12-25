@@ -32,7 +32,8 @@ class UpdateTeamRoleRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('roles')->ignore($role->id)->where(function (Builder $query) {
+                Rule::unique('roles')->ignore($role->id)->where(function ($query) {
+                    /** @var \Illuminate\Database\Eloquent\Builder $query */
                     /** @var \App\Models\User $user */
                     $user = $this->user();
 

@@ -27,7 +27,8 @@ class UpdateTeamMemberRoleRequest extends FormRequest
             'role_id' => [
                 'required',
                 'integer',
-                Rule::exists('roles', 'id')->where(function (Builder $query) {
+                Rule::exists('roles', 'id')->where(function ($query) {
+                    /** @var \Illuminate\Database\Eloquent\Builder $query */
                     /** @var \LiraUi\Team\Models\Team $team */
                     $team = $this->route('team');
 
