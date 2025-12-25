@@ -20,6 +20,8 @@ test('user can switch team', function () {
 
     $this->actingAs($user);
 
+    $abilities = $user->teamAbilitiesFor($team);
+
     $response = $this->put('/current-team/'.$team->id);
 
     $response->assertSessionHas('flash', [
@@ -28,6 +30,10 @@ test('user can switch team', function () {
     ]);
 
     $this->assertEquals($team->id, $user->fresh()->currentTeam->id);
+
+    $currentAbilities = $user->fresh()->teamAbilities;
+
+    expect($currentAbilities)->toBeArray();
 });
 
 test('user cannot switch into another user\'s team', function () {

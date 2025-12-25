@@ -2,10 +2,8 @@
 
 namespace LiraUi\Team\Http\Requests;
 
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Spatie\Permission\Models\Role;
 
 class UpdateTeamRoleRequest extends FormRequest
 {
